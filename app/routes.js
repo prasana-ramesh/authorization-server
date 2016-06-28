@@ -44,6 +44,10 @@ module.exports = function(app) {
     }
   });
 
+  apiRoutes.get('/getUserId', requireAuth, function(req, res) {
+    res.json({ userId: req.user._id, email: req.user.email });
+  });
+
   // Authenticate the user and get a JSON Web Token to include in the header of future requests.
   apiRoutes.post('/authenticate', function(req, res) {
     User.findOne({

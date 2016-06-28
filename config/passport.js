@@ -10,8 +10,12 @@ module.exports = function(passport) {
     secretOrKey: config.secret
   };
   passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
-    console.log("called here inside jwt strategy")
-    User.findOne({id: jwt_payload.id}, function(err, user) {
+    //user = jwt.verify(jwt_payload,config.secret);
+    //console.log('user logged in:'+user.id);
+    console.log(jwt_payload);
+    console.log(jwt_payload.id);
+    console.log(jwt_payload.email);
+    User.findOne({_id: jwt_payload.id}, function(err, user) {
       if (err) {
         return done(err, false);
       }
